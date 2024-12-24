@@ -29,7 +29,7 @@ if (navigator.geolocation) {
 const map = L.map("map").setView([0, 0], 2); // Start with a global view
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  attribution: "Map data © OpenStreetMap contributors",
+  attribution: "s.akash",
 }).addTo(map);
 
 // Object to store markers for connected users
@@ -40,7 +40,7 @@ socket.on("recive-location", (data) => {
   const { id, latitude, longitude } = data;
   map.setView([latitude, longitude], 16); // Focus the map on the latest location
   if (markers[id]) {
-    markers[id].setLatLng([latitude, longitude]); // Update the existing marker
+    markers[id].setLatLng([latitude, longitude]).addTo(map); // Update the existing marker
   } else {
     markers[id] = L.marker([latitude, longitude]).addTo(map); // Add a new marker
   }
